@@ -1,0 +1,247 @@
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Express.js User Management</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: yellowgreen;
+    }
+
+    form {
+      margin-bottom: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-transform: uppercase;
+      color: white;
+      background-color: burlywood;
+    }
+
+    button {
+      background-color: blue;
+      border-radius: 6px;
+      border-color: blue;
+      color: rgb(37, 51, 10);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    button:hover {
+      background-color: rgb(240, 240, 243);
+    }
+
+    input[type="text"] {
+      padding: 5px;
+      background-color: yellow;
+    }
+
+    #searchInput {
+      padding: 5px;
+      background-color: white;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+
+  <h1>express.js</h1>
+
+
+  <form action="/create" method="POST">
+    <input type="text" name="name" placeholder="Enter name" required />
+    <button type="submit">Add User</button>
+  </form>
+
+ 
+  <input type="text" id="searchInput" placeholder="Search by name..." />
+
+  
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function fetchUsers(query = '') {
+      const res = await fetch('/api/users?search=' + encodeURIComponent(query));
+      const users = await res.json();
+      const tbody = document.querySelector('#userTable tbody');
+      tbody.innerHTML = '';
+      users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.name}</td>
+          <td>
+            <form action="/update" method="POST">
+              <input type="hidden" name="id" value="${user.id}" />
+              <input type="text" name="name" placeholder="New name" required />
+              <button type="submit">Update</button>
+            </form>
+          </td>
+          <td>
+            <form action="/delete" method="POST">
+              <input type="hidden" name="id" value="${user.id}" />
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      fetchUsers(e.target.value);
+    });
+
+    fetchUsers(); 
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Express.js </title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: yellowgreen;
+    }
+
+    form {
+      margin-bottom: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-transform: uppercase;
+      color: white;
+      background-color: burlywood;
+    }
+
+    button {
+      background-color: blue;
+      border-radius: 6px;
+      border-color: blue;
+      color: rgb(37, 51, 10);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    button:hover {
+      background-color: rgb(240, 240, 243);
+    }
+
+    input[type="text"], input[type="email"], input[type="number"] {
+      padding: 5px;
+      background-color: yellow;
+    }
+
+    #searchInput {
+      padding: 5px;
+      background-color: white;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+
+  <h1>express.js</h1>
+
+  <form action="/create" method="POST">
+    <input type="text" name="name" placeholder="Enter name" required />
+    <input type="email" name="gmail" placeholder="Enter Gmail" required />
+    <input type="number" name="age" placeholder="Enter Age" required />
+    <button type="submit">Add User</button>
+  </form>
+  <input type="text" id="searchInput" placeholder="Search by name..." />
+ <table id="userTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gmail</th>
+        <th>Age</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function fetchUsers(query = '') {
+      const res = await fetch('/api/users?search=' + encodeURIComponent(query));
+      const users = await res.json();
+      const tbody = document.querySelector('#userTable tbody');
+      tbody.innerHTML = '';
+      users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.name}</td>
+          <td>${user.gmail}</td>
+          <td>${user.age}</td>
+          <td>
+            <form action="/update" method="POST">
+              <input type="hidden" name="id" value="${user.id}" />
+              <input type="text" name="name" placeholder="New name" required />
+              <input type="email" name="gmail" placeholder="New Gmail" required />
+              <input type="number" name="age" placeholder="New Age" required />
+              <button type="submit">Update</button>
+            </form>
+          </td>
+          <td>
+            <form action="/delete" method="POST">
+              <input type="hidden" name="id" value="${user.id}" />
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      fetchUsers(e.target.value);
+    });
+
+    fetchUsers(); 
+  </script>
+</body>
+</html>
